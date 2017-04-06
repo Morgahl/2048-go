@@ -112,9 +112,6 @@ func (p *Puzzle) Shift(input string) error {
 	default:
 		err = InvalidInput
 
-	case "\n":
-		err = nil
-
 	case "w", "W":
 		err = p.shiftUp()
 

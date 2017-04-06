@@ -25,6 +25,10 @@ func main() {
 		spacer()
 
 		in := scan.Text()
+		if in == "\n" {
+			continue
+		}
+
 		err := puz.Shift(in)
 
 		switch err {

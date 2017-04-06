@@ -28,7 +28,6 @@ func (c cell) isEmpty() bool {
 func mergeCells(cs []*cell) bool {
 	var work bool
 
-	// pack initial cells towards left
 	for l := 0; l < len(cs); l++ {
 		csl := cs[l]
 		if csl.isEmpty() {
@@ -42,40 +41,20 @@ func mergeCells(cs []*cell) bool {
 				}
 			}
 		}
-	}
 
-	// check for cell merges and merge right into left
-	for l := 0; l < len(cs)-1; l++ {
-		left := cs[l]
-		if left.isEmpty() {
-			break
-		}
-
-		right := cs[l+1]
-		if right.isEmpty() {
-			break
-		}
-
-		if left.value == right.value {
-			left.value *= 2
-			right.value = 0
-			work = true
-			l++
-		}
-	}
-
-	// pack final cells towards left
-	for l := 0; l < len(cs); l++ {
-		csl := cs[l]
 		if csl.isEmpty() {
-			for r := l + 1; r < len(cs); r++ {
-				csr := cs[r]
-				if !csr.isEmpty() {
-					csl.value = csr.value
+			break
+		}
+
+		for r := l + 1; r < len(cs); r++ {
+			csr := cs[r]
+			if !csr.isEmpty() {
+				if csl.value == csr.value {
+					csl.value *= 2
 					csr.value = 0
 					work = true
-					break
 				}
+				break
 			}
 		}
 	}
